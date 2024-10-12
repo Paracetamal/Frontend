@@ -14,11 +14,12 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-.custom-input label {
+label {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   margin-left: 5px;
   margin-top: 10px;
+  color: #17181b;
 }
 
 .custom-input input {
@@ -48,6 +49,6 @@ label {
   font-size: 0.875em;
 }
 
-.input-error input{
+.input-error input {
   border: 1px solid red !important;
 }

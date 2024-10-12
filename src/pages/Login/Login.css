@@ -1,12 +1,102 @@
 /* Logo */
-.logo-img-login {
-  width: 100%;
-  display: flex;
-  justify-content: start;
+.logo-login {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+  font-family: "Poppins";
+  font-size: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(221, 17, 0, 0.7) 28.95%,
+    #a50f34 86.21%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-left: 40px;
 }
 
-.logo-img-login img {
-  width: 153.71px;
-  height: 32.84px;
-  margin-left: 40px;
+.container-main-register {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.container-register {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-container-password h2 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 54px;
+  color: #17181b;
+}
+
+.password-input {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.password-input input {
+  padding-right: 90px;
+}
+
+.password-input button {
+  position: absolute;
+  top: 58%;
+  right: 23px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #bdc1c6;
+}
+
+.form-container-password p {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.form-container-password input,
+.form-container-password button {
+  font-size: 16px;
+}
+
+.form-container-password input {
+  border: 1px solid #bdc1c6;
+  border-radius: 7px;
+  height: 50px;
+  width: 400px;
+  padding-left: 20px;
+}
+
+.form-container input::placeholder,
+.form-container select option[value=""][disabled] {
+  color: #9aa0a6;
+}
+
+.existing-account {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.existing-account a {
+  color: #17181b;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.existing-account a span {
+  color: #A50F34;
+  font-weight: 600;
+}
+
+.existing-account p {
+  font-size: 16px;
 }
