@@ -1,0 +1,147 @@
+/* Geral */
+td,
+th {
+  padding: 18px;
+  border: none;
+  border-bottom: 1px solid #e8eaed;
+}
+
+table {
+  border-collapse: collapse;
+  white-space: nowrap;
+  margin-bottom: 30px;
+  min-width: 1086px;
+}
+
+/* Estilização de Cabeçalhos */
+th {
+  text-align: center;
+  font-size: 18px;
+  color: #17181b;
+  font-weight: 600;
+}
+
+.th-client-name {
+  text-align: left;
+}
+
+.th-client-cpf {
+  text-align: left;
+}
+
+.th-client-status,
+.th-client-buy {
+  text-align: left;
+}
+
+/* Estilização de Células */
+td {
+  padding: 18px;
+  text-align: center;
+  font-size: 15px;
+  color: #3c4043;
+}
+
+.td-client-name {
+  text-align: left;
+}
+
+.td-client-cpf {
+  text-align: left;
+}
+
+.td-client-status {
+  text-align: left;
+  width: 100px;
+}
+
+.td-client-buy {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+/* Contêiner de Status */
+.container-client-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 28px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.container-client-status[data-status="true"] {
+  background: rgba(0, 188, 64, 0.15);
+  color: #00bc40;
+}
+
+.container-client-status[data-status="false"] {
+  background: rgba(188, 0, 0, 0.15);
+  color: #bc0000;
+}
+
+/* Contêiner da Tabela */
+.container-table {
+  overflow-x: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilização do Ícone de Compra */
+.plus-icon {
+  font-size: 24px;
+  background: linear-gradient(19%, #dd1100 70%, #a50f34 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.plus-icon:hover {
+  opacity: 0.8;
+}
+
+/* Scrollbar customizado */
+.container-table::-webkit-scrollbar {
+  height: 10px;
+}
+
+.container-table::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container-table::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #e0e0e0;
+  border: none;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background-color: #e0e0e0;
+  border: 2px solid white;
+}
+
+/* Cores de status */
+.green {
+  color: #4bd178;
+}
+
+.red {
+  color: #f35b5b;
+}
+
+.td-client-buy {
+  color: #ff4040;
+}
