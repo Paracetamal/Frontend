@@ -38,7 +38,7 @@ const Login = () => {
                   </button>
                 </div>
 
-                <ButtonLink to="/historic">Entrar</ButtonLink>
+                <ButtonLink to="/home">Entrar</ButtonLink>
               </form>
 
               <div className="existing-account">
