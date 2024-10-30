@@ -1,0 +1,71 @@
+/* Estilos do modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content-client {
+  background-color: white;
+  padding: 20px 64px 20px 64px;
+  border-radius: 8px;
+  width: 1086px;
+  text-align: center;
+}
+
+.product-list-scroll {
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 50vh;
+  margin-top: 20px;
+}
+
+.open-modal-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-info {
+  display: flex;
+  gap: 39px;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-value span {
+  color: #dd1100;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 31px;
+}
+
+.buttons .custom-button {
+  width: 164px;
+}
+
+.buttons button {
+  background-color: transparent;
+  border: none;
+  color: #a50f34;
+  font-weight: 600;
+  font-size: 16px;
+}

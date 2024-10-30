@@ -1,36 +1,30 @@
-import React, { useState, useEffect } from 'react';
+// ClientTable.jsx
+
+import React, { useState } from 'react';
 import "./ClientTable.css";
 import { ProductTable, ButtonLink } from '../Index';
 import productList from '../Searchbar/dataProduct';
+import Modal from '../Modal/Modal'; 
 
-const ClientTable = ({ clients, onEvaluate }) => {
+const ClientTable = ({ clients }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
   const [searchValue, setSearchValue] = useState("");
 
-  const searchLowerCase = searchValue.toLowerCase();
-  const filteredProducts = productList.filter((client) =>
-    client.name.toLowerCase().includes(searchLowerCase)
-  );
-
-  // Função para abrir o modal e definir o cliente selecionado
   const handleOpenModal = (client) => {
     setSelectedClient(client);
     setIsModalOpen(true);
   };
 
-  // Função para fechar o modal
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedClient(null);
   };
 
-  // Detectar clique fora do modal para fechar
-  const handleOutsideClick = (e) => {
-    if (e.target.className === 'modal') {
-      handleCloseModal();
-    }
-  };
+  const searchLowerCase = searchValue.toLowerCase();
+  const filteredProducts = productList.filter((product) =>
+    product.name.toLowerCase().includes(searchLowerCase)
+  );
 
   return (
     <div className="container-table">
@@ -69,36 +63,12 @@ const ClientTable = ({ clients, onEvaluate }) => {
         </tbody>
       </table>
 
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="modal" onClick={handleOutsideClick}>
-          <div className="modal-content-client">
-            {selectedClient ? (
-              <div className="modal-header">
-                <h3>{selectedClient.name}</h3>
-                <div className="modal-info">
-                  <p><strong>CPF:</strong> {selectedClient.cpf}</p>
-                  <p><strong>Endereço:</strong> {selectedClient.address}</p>
-                  <p><strong>Telefone:</strong> {selectedClient.phone}</p>
-                </div>
-              </div>
-            ) : (
-              <p>Nenhum cliente selecionado.</p>
-            )}
-            {/* Lista de produtos com scroll */}
-            <div className="product-list-scroll">
-              <ProductTable products={filteredProducts} />
-            </div>
-            <div className="modal-value">
-              <h3>Valor total: <span>R$ 100,00</span></h3>
-              <div className="buttons">
-                <button>Adicionar novos produtos</button>
-                <ButtonLink to="/pay">Pagar Conta</ButtonLink>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={isModalOpen}
+        client={selectedClient}
+        onClose={handleCloseModal}
+        products={filteredProducts}
+      />
     </div>
   );
 };
