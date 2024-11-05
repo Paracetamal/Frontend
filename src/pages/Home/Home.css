@@ -15,11 +15,6 @@
   justify-content: center; 
 }
 
-button {
-  flex: 1;
-  text-align: right;
-}
-
 .header .custom-button {
   width: 262px;
   margin-right: 40px;

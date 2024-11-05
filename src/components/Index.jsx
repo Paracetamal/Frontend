@@ -4,6 +4,7 @@ import Searchbar from "../components/Searchbar/Searchbar";
 import ClientTable from "../components/ClientTable/ClientTable";
 import Pagination from "../components/Pagination/Pagination";
 import ProductTable from "../components/ProductTable/ProductTable";
+import ClientRegistrationModal from "../components/ClientRegistrationModal/ClientRegistrationModal";
 
 export {
   ButtonLink,
@@ -12,4 +13,5 @@ export {
   ClientTable,
   Pagination,
   ProductTable,
+  ClientRegistrationModal,
 };

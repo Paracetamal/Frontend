@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Searchbar, ClientTable, Pagination, ButtonLink } from '../../components/Index';
+import { Searchbar, ClientTable, Pagination, ClientRegistrationModal } from '../../components/Index';
 import clientList from '../../components/Searchbar/data';
 import "./Home.css";
 
@@ -7,6 +7,7 @@ const Home = () => {
     const [searchValue, setSearchValue] = useState("");
     const [offset, setOffset] = useState(0);
     const [totalEvents, setTotalEvents] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
 
     const searchLowerCase = searchValue.toLowerCase();
     const filteredClients = clientList.filter((client) =>
@@ -32,11 +33,10 @@ const Home = () => {
                     <Searchbar setSearch={setSearchValue} />
                 </div>
 
-                <ButtonLink to="/newclient">Cadastrar novo cliente</ButtonLink>
+                <button className='custom-button' onClick={() => setIsModalOpen(true)}>Cadastrar novo cliente</button>
             </div>
 
             <div className="container-historic-content">
-
                 {filteredClients.length === 0 ? (
                     <div className="container-not-found">
                         <p>Não existe nenhum cliente com esse nome</p>
@@ -53,6 +53,9 @@ const Home = () => {
                     </>
                 )}
             </div>
+
+            {/* Modal */}
+            <ClientRegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
     );
 }
