@@ -1,8 +1,8 @@
 import React from 'react';
 import { Input, ButtonLink } from '../Index';
-import "./ClientRegistrationModal.css";
+import "./ProductRegistrationModal.css";
 
-const ClientRegistrationModal = ({ isOpen, onClose, onSubmit }) => {
+const ProductRegistrationModal = ({ isOpen, onClose, onSubmit }) => {
   if (!isOpen) return null;
 
   const handleOutsideClick = (e) => {
@@ -19,7 +19,7 @@ const ClientRegistrationModal = ({ isOpen, onClose, onSubmit }) => {
   return (
     <div className="modal" onClick={handleOutsideClick}>
       <div className="modal-content-client-registration">
-        <h3 style={{ textAlign: 'center' }}>Cadastrar novo cliente</h3>
+        <h3 style={{ textAlign: 'center' }}>Cadastrar novo produto</h3>
         <form className="modal-form" onSubmit={handleFormSubmit}>
           <div className="modal-column">
             <Input label='Nome completo' id='name' placeholder='Maria Madalena' className="input-style" />
@@ -39,4 +39,4 @@ const ClientRegistrationModal = ({ isOpen, onClose, onSubmit }) => {
   );
 };
 
-export default ClientRegistrationModal;
+export default ProductRegistrationModal;
