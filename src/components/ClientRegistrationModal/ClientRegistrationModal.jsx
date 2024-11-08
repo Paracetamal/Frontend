@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, ButtonLink } from '../Index';
+import { Input } from '../Index';
 import "./ClientRegistrationModal.css";
 
 const ClientRegistrationModal = ({ isOpen, onClose, onSubmit }) => {
