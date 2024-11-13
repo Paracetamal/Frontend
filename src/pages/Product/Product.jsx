@@ -4,6 +4,7 @@ import { Searchbar, ProductRegistrationModal } from '../../components/Index';
 import './Product.css';
 import Image1 from "../../components/Image/remedio.png";
 import productList from '../../components/Searchbar/dataProduct';
+import { useNavigate } from 'react-router-dom'; // Importa o hook useNavigate
 
 // Mock de dados de produtos
 const initialProducts = [
@@ -15,11 +16,13 @@ const initialProducts = [
   { id: 6, name: 'Analgésico e Antitérmico Dipirona Monoidratada 1g', price: 20.0, image: Image1 },
 ];
 
-function Product({ onComplete }) {
+function Product() {
   const [products, setProducts] = useState(initialProducts);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); // Controla o modal de cadastro de produto
+  
+  const navigate = useNavigate(); // Inicializa o hook de navegação
 
   const searchLowerCase = searchValue.toLowerCase();
   const filteredProduct = productList.filter((client) =>
@@ -29,6 +32,11 @@ function Product({ onComplete }) {
   // Função para adicionar produtos selecionados
   const handleAddProduct = (product) => {
     setSelectedProducts([...selectedProducts, product]);
+  };
+
+  // Função para concluir e voltar à página principal
+  const handleComplete = () => {
+    navigate(-1); // Retorna para a página anterior (principal)
   };
 
   // Filtra os produtos com base no termo de busca
@@ -48,7 +56,7 @@ function Product({ onComplete }) {
         </div>
 
         <div className="buttons-product">
-          <button onClick={() => onComplete(selectedProducts)} className="complete-btn">
+          <button onClick={handleComplete} className="complete-btn">
             Concluir
           </button>
 
