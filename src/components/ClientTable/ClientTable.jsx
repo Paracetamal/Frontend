@@ -1,30 +1,45 @@
-// ClientTable.jsx
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import "./ClientTable.css";
-import { ProductTable, ButtonLink } from '../Index';
-import productList from '../Searchbar/dataProduct';
-import Modal from '../Modal/Modal'; 
+import Modal from "../Modal/Modal";
+import requestAPI from "../../requestAPI";
 
 const ClientTable = ({ clients }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
+  const [productList, setProductList] = useState([]); // Inicializa como um array vazio
   const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleOpenModal = (client) => {
-    setSelectedClient(client);
+  const handleOpenModal = async (client) => {
+    setLoading(true);
     setIsModalOpen(true);
+
+    try {
+      const response = await requestAPI(`/clients/${client.id}`, "GET");
+
+      const products = response.order ? response.order.map((orderItem) => orderItem) : [];
+      console.log(products);
+
+      setProductList(products); // Armazenar os produtos na variável productList
+      setSelectedClient(client); // Definir o cliente selecionado
+    } catch (error) {
+      console.error("Erro ao buscar produtos do cliente:", error);
+      setProductList([]); // Garantir que, em caso de erro, o estado seja limpo
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedClient(null);
+    setProductList([]); // Limpar os dados do produto ao fechar o modal
   };
 
   const searchLowerCase = searchValue.toLowerCase();
-  const filteredProducts = productList.filter((product) =>
-    product.name.toLowerCase().includes(searchLowerCase)
-  );
+  // const filteredProducts = Array.isArray(productList)
+  //   ? productList.filter((product) => product.name.toLowerCase().includes(searchLowerCase))
+  //   : []; // Verifique se productList é um array antes de filtrar
 
   return (
     <div className="container-table">
@@ -43,18 +58,12 @@ const ClientTable = ({ clients }) => {
               <td className="td-client-name">{client.name}</td>
               <td className="td-client-cpf">{client.cpf}</td>
               <td className="td-client-status">
-                <div
-                  className="container-client-status"
-                  data-status={client.status === "true" ? "PAGO" : "PENDENTE"}
-                >
-                  {client.status === "true" ? "PAGO" : "PENDENTE"}
+                <div className="container-client-status" data-status={client.status ? "PAGO" : "PENDENTE"}>
+                  {client.status ? "PAGO" : "PENDENTE"}
                 </div>
               </td>
               <td className="td-client-buy">
-                <span
-                  className="material-symbols-outlined open-modal-icon"
-                  onClick={() => handleOpenModal(client)}
-                >
+                <span className="material-symbols-outlined open-modal-icon" onClick={() => handleOpenModal(client)}>
                   heart_plus
                 </span>
               </td>
@@ -63,11 +72,13 @@ const ClientTable = ({ clients }) => {
         </tbody>
       </table>
 
+      {/* Modal */}
       <Modal
         isOpen={isModalOpen}
         client={selectedClient}
         onClose={handleCloseModal}
-        products={filteredProducts}
+        products={productList} // Passar os produtos filtrados para o modal
+        loading={loading} // Passar o estado de carregamento
       />
     </div>
   );

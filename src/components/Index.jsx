@@ -1,11 +1,11 @@
-import Input from "../components/Input/Input";
-import ButtonLink from "../components/ButtonLink/ButtonLink";
-import Searchbar from "../components/Searchbar/Searchbar";
-import ClientTable from "../components/ClientTable/ClientTable";
-import Pagination from "../components/Pagination/Pagination";
-import ProductTable from "../components/ProductTable/ProductTable";
-import ClientRegistrationModal from "../components/ClientRegistrationModal/ClientRegistrationModal";
-import ProductRegistrationModal from "../components/ProductRegistrationModal/ProductRegistrationModal";
+import Input from "./Input/Input";
+import ButtonLink from "./ButtonLink/ButtonLink";
+import Searchbar from "./Searchbar/Searchbar";
+import ClientTable from "./ClientTable/ClientTable";
+import Pagination from "./Pagination/Pagination";
+import ProductTable from "./ProductTable/ProductTable";
+import ClientRegistrationModal from "./ClientRegistrationModal/ClientRegistrationModal";
+import ProductRegistrationModal from "./ProductRegistrationModal/ProductRegistrationModal";
 
 export {
   ButtonLink,

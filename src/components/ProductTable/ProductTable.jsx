@@ -2,7 +2,6 @@ import React from "react";
 import "./ProductTable.css";
 
 const ProductTable = ({ products, onEvaluate }) => {
-
   return (
     <div className="container-table-product">
       <table>
@@ -17,15 +16,14 @@ const ProductTable = ({ products, onEvaluate }) => {
         <tbody>
           {products.map((product, index) => (
             <tr key={index}>
-              <td className="td-product-name">{product.name}</td>
-              <td className="td-product-date">{product.date}</td>
-              <td className="td-product-quantity">{product.quantity}</td>
-              <td className="td-product-price">{product.price}</td>
+              <td className="td-product-name">{product.product.name}</td>
+              <td className="td-product-date">{product.datePurchase}</td>
+              <td className="td-product-quantity">{product.amount}</td>
+              <td className="td-product-price">{product.value}</td>
             </tr>
           ))}
         </tbody>
       </table>
-
     </div>
   );
 };

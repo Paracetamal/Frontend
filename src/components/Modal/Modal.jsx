@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./Modal.css";
-import { ProductTable, ButtonLink, ProductRegistrationModal } from '../Index';
+import { ProductTable, ButtonLink, ProductRegistrationModal } from "../Index";
 
 const Modal = ({ isOpen, client, onClose, products }) => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal interno
@@ -8,7 +8,7 @@ const Modal = ({ isOpen, client, onClose, products }) => {
   if (!isOpen && !isModalOpen) return null; // Não exibe o modal se ambos estiverem fechados
 
   const handleOutsideClick = (e) => {
-    if (e.target.className === 'modal') {
+    if (e.target.className === "modal") {
       onClose();
     }
   };
@@ -28,9 +28,15 @@ const Modal = ({ isOpen, client, onClose, products }) => {
               <div className="modal-header">
                 <h3>{client.name}</h3>
                 <div className="modal-info">
-                  <p><strong>CPF:</strong> {client.cpf}</p>
-                  <p><strong>Endereço:</strong> {client.address}</p>
-                  <p><strong>Telefone:</strong> {client.phone}</p>
+                  <p>
+                    <strong>CPF:</strong> {client.cpf}
+                  </p>
+                  <p>
+                    <strong>Endereço:</strong> {client.address}
+                  </p>
+                  <p>
+                    <strong>Telefone:</strong> {client.telephone}
+                  </p>
                 </div>
               </div>
             ) : (
@@ -40,7 +46,9 @@ const Modal = ({ isOpen, client, onClose, products }) => {
               <ProductTable products={products} />
             </div>
             <div className="modal-value">
-              <h3>Valor total: <span>R$ 100,00</span></h3>
+              <h3>
+                Valor total: <span>R$ 100,00</span>
+              </h3>
               <div className="buttons">
                 <button onClick={openProductModal}>Adicionar novos produtos</button>
                 <ButtonLink to="/pay">Pagar Conta</ButtonLink>
