@@ -26,7 +26,7 @@ const Home = () => {
         <div className="container-main">
             <div className="header">
                 <div className="logo-login">
-                    <h1>PARACETAMAL</h1>
+                    <h1>PARACETAMAL</h1> 
                 </div>
 
                 <div className="filter-searchbar">
