@@ -20,7 +20,7 @@ const App = () => {
       </Routes>
 
       <Routes>
-        <Route path="/cadastro-produto" element={<Product />} />
+        <Route path="/product" element={<Product />} />
       </Routes>
     </Router>
   );

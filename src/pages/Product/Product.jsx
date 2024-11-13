@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { Searchbar } from '../../components/Index';
+import { Searchbar, ProductRegistrationModal } from '../../components/Index';
 import './Product.css';
 import Image1 from "../../components/Image/remedio.png";
 import productList from '../../components/Searchbar/dataProduct';
@@ -15,24 +15,16 @@ const initialProducts = [
   { id: 6, name: 'Analgésico e Antitérmico Dipirona Monoidratada 1g', price: 20.0, image: Image1 },
 ];
 
-
-function Product({ onAddProduct, onComplete }) {
+function Product({ onComplete }) {
   const [products, setProducts] = useState(initialProducts);
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [totalEvents, setTotalEvents] = useState(0);
-  const [searchTerm, setSearchTerm] = useState('');
-
   const [searchValue, setSearchValue] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Controla o modal de cadastro de produto
 
   const searchLowerCase = searchValue.toLowerCase();
   const filteredProduct = productList.filter((client) =>
     client.name.toLowerCase().includes(searchLowerCase)
   );
-
-  useEffect(() => {
-    setTotalEvents(filteredProduct.length);
-  }, [filteredProduct]);
-
 
   // Função para adicionar produtos selecionados
   const handleAddProduct = (product) => {
@@ -41,13 +33,11 @@ function Product({ onAddProduct, onComplete }) {
 
   // Filtra os produtos com base no termo de busca
   const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    product.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
     <div className="container-main">
-      {/* Header */}
-
       <header className="header">
         <div className="logo-login">
           <h1>PARACETAMAL</h1>
@@ -62,12 +52,12 @@ function Product({ onAddProduct, onComplete }) {
             Concluir
           </button>
 
-          <button className='custom-button' onClick={onAddProduct}>Cadastrar novo produto</button>
+          {/* Abre o modal de cadastro de produto */}
+          <button className='custom-button' onClick={() => setIsModalOpen(true)}>Cadastrar novo produto</button>
         </div>
       </header>
 
       <div className="main-product-list">
-        {/* Lista de Cards de Produtos */}
         <div className="product-list">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} onAdd={handleAddProduct} />
@@ -75,7 +65,13 @@ function Product({ onAddProduct, onComplete }) {
         </div>
       </div>
 
-
+      {/* Modal de Cadastro de Produto */}
+      {isModalOpen && (
+        <ProductRegistrationModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+        />
+      )}
     </div>
   );
 }
