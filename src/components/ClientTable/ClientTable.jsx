@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./ClientTable.css";
 import Modal from "../Modal/Modal";
 import requestAPI from "../../requestAPI";
@@ -7,7 +7,6 @@ const ClientTable = ({ clients }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
   const [productList, setProductList] = useState([]); // Inicializa como um array vazio
-  const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleOpenModal = async (client) => {
@@ -18,7 +17,6 @@ const ClientTable = ({ clients }) => {
       const response = await requestAPI(`/clients/${client.id}`, "GET");
 
       const products = response.order ? response.order.map((orderItem) => orderItem) : [];
-      console.log(products);
 
       setProductList(products); // Armazenar os produtos na variável productList
       setSelectedClient(client); // Definir o cliente selecionado
@@ -35,11 +33,6 @@ const ClientTable = ({ clients }) => {
     setSelectedClient(null);
     setProductList([]); // Limpar os dados do produto ao fechar o modal
   };
-
-  const searchLowerCase = searchValue.toLowerCase();
-  // const filteredProducts = Array.isArray(productList)
-  //   ? productList.filter((product) => product.name.toLowerCase().includes(searchLowerCase))
-  //   : []; // Verifique se productList é um array antes de filtrar
 
   return (
     <div className="container-table">

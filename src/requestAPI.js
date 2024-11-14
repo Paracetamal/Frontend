@@ -2,6 +2,8 @@ const API_URL = 'http://localhost:5000';
 
 export default async function requestAPI(path, method = 'GET', body = {}) {
   let requestOptions = {};
+  let isFormData = body instanceof FormData;
+
   switch (method) {
     case 'POST':
       requestOptions = {
@@ -9,9 +11,9 @@ export default async function requestAPI(path, method = 'GET', body = {}) {
         cache: 'no-store',
         headers: new Headers({
           Accept: 'application/json',
-          'Content-Type': 'application/json',
+          ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
         }),
-        body: JSON.stringify(body),
+        body: isFormData ? body : JSON.stringify(body),
       };
       break;
 

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { Input, ButtonLink } from '../Index';
+import React, { useState } from "react";
+import { Input } from "../Index";
+import requestAPI from "../../requestAPI";
+import { toast, ToastContainer } from "react-toastify";
 import "./ProductRegistrationModal.css";
 
 const ProductRegistrationModal = ({ isOpen, onClose, onSubmit }) => {
-  const [productName, setProductName] = useState('');
-  const [productValue, setProductValue] = useState('');
+  const [productName, setProductName] = useState("");
+  const [productValue, setProductValue] = useState("");
   const [productImage, setProductImage] = useState(null);
 
   // Função para atualizar a imagem do produto ao ser carregada
@@ -16,41 +18,57 @@ const ProductRegistrationModal = ({ isOpen, onClose, onSubmit }) => {
 
   // Fecha o modal ao clicar fora do conteúdo
   const handleOutsideClick = (e) => {
-    if (e.target.className === 'modal') {
+    if (e.target.className === "modal") {
       onClose();
     }
   };
 
   // Simula o envio dos dados
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Aqui, você pode adicionar uma função para exibir os dados ou salvar no console para teste.
-    console.log("Nome do Produto:", productName);
-    console.log("Valor do Produto:", productValue);
-    if (productImage) {
-      console.log("Imagem do Produto:", productImage.name);
+    if (!productImage || !productName || !productValue) {
+      return toast.error("Preencha todos os campos");
     }
-    onSubmit(); // Chama a função de envio após a simulação
+
+    const formData = new FormData();
+    formData.append("name", productName);
+    formData.append("price", productValue);
+    formData.append("img", productImage);
+    try {
+      const response = await requestAPI("/products/create", "POST", formData);
+
+      if (response.error) {
+        return toast.error(response.error);
+      }
+
+      setProductName("");
+      setProductValue("");
+      setProductImage(null);
+      return toast.success(response.status);
+    } catch (error) {
+      return toast.error("Erro no cadastro");
+    }
   };
 
   return (
     <div className="modal" onClick={handleOutsideClick}>
+      <ToastContainer />
       <div className="modal-content-client-registration">
-        <h3 style={{ textAlign: 'center' }}>Cadastrar novo produto</h3>
+        <h3 style={{ textAlign: "center" }}>Cadastrar novo produto</h3>
         <form className="modal-form-product" onSubmit={handleFormSubmit}>
           <div className="modal-column">
             <Input
-              label='Nome do produto'
-              id='name'
-              placeholder='Paracetamol'
+              label="Nome do produto"
+              id="name"
+              placeholder="Paracetamol"
               className="input-style"
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
             />
             <Input
-              label='Valor'
-              id='value'
-              placeholder='R$ 20,00'
+              label="Valor"
+              id="value"
+              placeholder="R$ 20,00"
               className="input-style"
               value={productValue}
               onChange={(e) => setProductValue(e.target.value)}
@@ -63,7 +81,9 @@ const ProductRegistrationModal = ({ isOpen, onClose, onSubmit }) => {
               onChange={handleProductImageChange}
             />
 
-            <button className='custom-button' type="submit">Cadastrar</button>
+            <button className="custom-button" type="submit">
+              Cadastrar
+            </button>
           </div>
         </form>
       </div>

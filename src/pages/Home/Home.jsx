@@ -7,7 +7,6 @@ const Home = () => {
   const [searchValue, setSearchValue] = useState("");
   const [offset, setOffset] = useState(0);
   const [totalEvents, setTotalEvents] = useState(0);
-  const [clientList, setClientList] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]); // Novo estado para a lista filtrada
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -18,9 +17,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await requestAPI("/clients/list/1", "GET");
-        setClientList(response);
 
-        // Filtra a lista de clientes após a resposta ser definida
         const filtered = response.filter((client) => client.name.toLowerCase().includes(searchLowerCase));
         setFilteredClients(filtered);
         setTotalEvents(filtered.length);
@@ -32,7 +29,7 @@ const Home = () => {
     };
 
     fetchData();
-  }, [searchLowerCase]); // Atualiza quando `searchLowerCase` muda
+  }, [searchLowerCase]);
 
   useEffect(() => {
     setOffset(0);
