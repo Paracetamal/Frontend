@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Modal.css";
 import { ProductTable, ButtonLink, ProductRegistrationModal } from "../Index";
 
@@ -11,11 +12,6 @@ const Modal = ({ isOpen, client, onClose, products }) => {
     if (e.target.className === "modal") {
       onClose();
     }
-  };
-
-  const openProductModal = () => {
-    setIsModalOpen(true);
-    onClose(); // Fecha o modal principal ao abrir o modal de cadastro de produto
   };
 
   return (
@@ -50,7 +46,9 @@ const Modal = ({ isOpen, client, onClose, products }) => {
                 Valor total: <span>R$ 100,00</span>
               </h3>
               <div className="buttons">
-                <button onClick={openProductModal}>Adicionar novos produtos</button>
+                <Link to="/product">
+                  <button>Adicionar novos produtos</button>
+                </Link>
                 <ButtonLink to="/pay">Pagar Conta</ButtonLink>
               </div>
             </div>
